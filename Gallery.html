@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery - Iris English Academy📸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins", sans-serif; }
+body { background-color:#f2f2f2; }
+
+/* Header */
+.header-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: rgba(11, 179, 221, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.header-left-logos {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left-logos img { height: 40px; cursor:pointer; }
+
+.logo {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:36px;
+    font-weight:700;
+    color:white;
+}
+
+.logo img { height:50px; }
+
+/* Menu & Back buttons container */
+.header-buttons {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-buttons a, .header-buttons span {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: rgba(0,31,91,0.6);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.header-buttons a:hover, .header-buttons span:hover {
+    background-color: rgba(0,31,91,0.9);
+    transform: scale(1.05);
+}
+
+/* Sidebar */
+.sidebar {
+    height:100%;
+    width:0;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,0.95);
+    overflow-x:hidden;
+    transition:0.3s;
+    padding-top:80px;
+    z-index:200;
+}
+
+.sidebar a {
+    padding:15px 30px;
+    text-decoration:none;
+    font-size:22px;
+    color:white;
+    display:block;
+    margin:5px 15px;
+    border-radius:8px;
+    transition:0.3s;
+    text-align:center;
+}
+
+.sidebar a:hover { background-color: rgba(255,255,255,0.2); }
+.sidebar .closebtn { position:absolute; top:20px; right:25px; }
+
+/* Content */
+.content {
+    max-width:1000px;
+    margin: 120px auto 50px auto;
+    padding:0 20px;
+}
+
+.page-logo { display:block; margin:20px auto; width:200px; }
+h1,h2,p { text-align:center; }
+
+.gallery-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:20px;
+    margin:30px 0;
+}
+
+.gallery-grid img {
+    width:100%;
+    border-radius:12px;
+    object-fit:cover;
+    cursor:pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* Footer */
+.footer {
+    width:100%;
+    background-color:#6a0dad;
+    color:white;
+    padding:40px 20px;
+    text-align:center;
+    font-size:18px;
+}
+
+.footer a { color:white; }
+
+/* Popup Modal */
+#imageModal {
+    display: none;
+    position: fixed;
+    z-index: 300;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+#imageModal img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    animation: pop 0.3s ease;
+}
+
+#imageModal span {
+    position: absolute;
+    top:20px;
+    right:30px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.7); opacity:0; }
+    100% { transform: scale(1); opacity:1; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header-bar">
+    <div class="header-left-logos">
+        <a href="https://www.facebook.com/irisenglishacademyrapti" target="_blank"><img src="facebook.png" alt="Facebook"></a>
+        <a href="https://irisschool.edu.np/" target="_blank"><img src="iris.png" alt="School Website"></a>
+    </div>
+
+    <div class="logo">
+        <img src="irislogo.png" alt="IRIS Logo"> IRIS
+    </div>
+
+    <div class="header-buttons">
+        <a href="index.html">&#8592; Back</a>
+        <span onclick="openSidebar()">&#9776; Menu</span>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
+    <a href="index.html">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Events</a>
+    <a href="#">Gallery</a>
+    <a href="#">Academics</a>
+    <a href="#">Facilities</a>
+    <a href="#">Contact</a>
+    <hr style="margin:20px 0; border:1px solid white;">
+    <a href="#">English</a>
+    <a href="#">नेपाली</a>
+</div>
+
+<!-- Content -->
+<div class="content">
+    <img src="irislogo.png" alt="Iris Logo" class="page-logo">
+    <h1>Iris English Academy</h1>
+    <p><b>Gallery section captures the vibrant life and memorable moments including teachers at Iris English Academy.</b></p>
+
+    <hr style="width:70%; margin:30px auto; border:1px solid #ccc;">
+    <h2>Most Reputed and Respected Teachers</h2>
+
+    <div class="gallery-grid">
+        <img src="pujanmam.jpg" alt="Pujan Mam">
+        <img src="pujan sir.jpg" alt="Pujan Sir">
+        <img src="sugamsir.jpg" alt="Sugam Sir">
+        <img src="nishantsir.jpg" alt="Nishant Sir">
+        <img src="chadanimam.jpg" alt="Chadani Mam">
+        <img src="bimalamam.jpg" alt="Bimala Mam">
+        <img src="mam.jpg" alt="Mam">
+        <img src="krishnasir1.jpg" alt="Krishna Sir">
+    </div> <br> <hr> <br>
+
+    <h4 style="font-size: 25px; text-align: center;"> Memorable ceremonies & awards </h4> <br>
+    <div class="gallery-grid">
+        <img src="award3.jpg" alt="Ceremony 1">
+        <img src="krishnasir.jpg" alt="Ceremony 2">
+        <img src="deepaksaru.jpg" alt="Ceremony 3">
+        <img src="teacher2.jpg" alt="Ceremony 4">
+        <img src="teacher3.jpg" alt="Ceremony 5">
+        <img src="award3.jpg" alt="Ceremony 6">
+        <img src="award.jpg" alt="Ceremony 6">
+        <img src="teachers.jpg" alt="Ceremony 6">
+</div> <br>
+
+<!-- Image Modal -->
+<div id="imageModal">
+    <span onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="Popup Image">
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2025 IRIS School. All rights reserved.</p>
+    <p>
+        <a href="https://www.facebook.com/irisenglishacademyrapti" target="_blank">Facebook</a> |
+        <a href="https://irisschool.edu.np/" target="_blank">Website</a>
+    </p>
+</div>
+
+<script>
+// Sidebar
+function openSidebar() { document.getElementById("mySidebar").style.width="250px"; }
+function closeSidebar() { document.getElementById("mySidebar").style.width="0"; }
+
+// Image Modal
+const images = document.querySelectorAll('.gallery-grid img');
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+    });
+});
+
+function closeModal() {
+    modal.style.display = "none";
+}
+</script>
+
+</body>
+</html>
